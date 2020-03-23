@@ -1,0 +1,30 @@
+{% extends "jobs/base.html" %}
+    {% block content %}
+        <h1> Welcome to the Disaster Recovery Application  </h1>
+
+<h2> JOB CODE MANAGEMENT  <a href="{% url 'jobs:job_create' %}">Add New</a></h2>
+
+<table style="width:90%">
+  <tr>
+    <th>Job Code</th>
+    <th>Description</th>
+    <th>Hourly Rate</th>
+    <th>Max Hours per day</th>
+
+  </tr>
+   {% for job in jobs %}
+    <tr>
+
+    <td>{{job.jobcode}}</td>
+    <td>{{job.description}}</td>
+    <td>${{job.hourlyrate}}/Hr.</td>
+    <td>{{job.max_hours}} Hr.</td>
+    <td><a href="{% url 'jobs:job_delete' job.id %}"> delete </a></td>
+    <td><a href="{% url 'jobs:job_edit' job.id %}"> edit </a></td>
+
+
+  </tr>
+
+    {% endfor %}
+
+    {% endblock %}

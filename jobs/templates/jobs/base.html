@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Disaster Recovery{% endblock %}</title>
+    <link href= "{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+<div id="sidebar">
+    {% block sidebar %}
+    <ul><li><a href="/">Home</a></li>
+    <ul><li><a href="{% url 'jobs:job_details' %}">Job code Management</a></li>
+    <ul><li><a href="{% url 'machines:machine_details' %}">Machine Management</a></li>
+    <ul><li><a href="/">Timecard Approval</a></li>
+    {% endblock %}
+</div>
+<div id="content">
+    {% block content %}
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% endblock %}
+</div>
+<div id="footer">{% block footer %}{% endblock %}</div>
+</body>
+</html>

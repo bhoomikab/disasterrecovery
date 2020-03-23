@@ -1,0 +1,29 @@
+{% extends "jobs/base.html" %}
+    {% block content %}
+        <h1> Welcome to the Disaster Recovery Application  </h1>
+
+<h2> MACHINE MANAGEMENT <a href="{% url 'machines:machine_create' %}">Add New</a></h2>
+
+<table style="width:90%">
+  <tr>
+    <th>Job Code</th>
+    <th>Description</th>
+    <th>Hourly Rate</th>
+    <th>Max Hours per day</th>
+
+  </tr>
+   {% for machine in machines %}
+    <tr>
+
+    <td>{{machine.machinecode}}</td>
+    <td>{{machine.description}}</td>
+    <td>${{machine.hourlyrent}}/Hr.</td>
+    <td>{{machine.max_hours_machine}} Hr.</td>
+    <td><a href="{% url 'machines:machine_delete' machine.id %}"> delete </a></td>
+    <td><a href="{% url 'machines:machine_edit' machine.id %}"> edit </a></td>
+
+  </tr>
+
+    {% endfor %}
+
+    {% endblock %}
