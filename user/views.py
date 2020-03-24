@@ -50,3 +50,8 @@ class ContractorSignupView(CreateView):
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+
+def UserDetails(request):
+    users = User.objects.all()
+    return render(request, 'user/user_details.html', {'users': users})

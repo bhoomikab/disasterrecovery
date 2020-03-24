@@ -1,0 +1,23 @@
+{% extends "jobs/base.html" %}
+    {% block content %}
+        <h1> Welcome to the Disaster Recovery Application  </h1>
+
+<h2> USERS IN DATABASE </h2>
+
+<table style="width:90%">
+  <tr>
+    <th>REGISTERED USERS</th>
+    <th>ADMIN USER?</th>
+
+  </tr>
+   {% for user in users %}
+    <tr>
+
+    <td>{{user.username}}</td>
+    <td>{{user.is_admin}}</td>
+
+  </tr>
+
+    {% endfor %}
+
+    {% endblock %}

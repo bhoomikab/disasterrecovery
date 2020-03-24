@@ -26,10 +26,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    # url(r'user/', include(('user.urls', 'user'), namespace='user')),
+    url(r'user/', include(('user.urls', 'user'), namespace='user')),
     url(r'jobs/', include(('jobs.urls', 'jobs'), namespace='jobs')),
     url(r'machines/', include(('machines.urls', 'machines'), namespace='machines')),
-    url('accounts/$', include('django.contrib.auth.urls')),
+    url('accounts/', include('django.contrib.auth.urls')),
     url('accounts/signup/$', SignUpView.as_view(), name='signup'),
     url('accounts/signup/administrator/$', AdminSignupView.as_view(), name='admin_signup'),
     url('accounts/signup/contractor/$', ContractorSignupView.as_view(), name='contractor_signup'),
