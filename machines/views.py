@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
+from user.decorators import admin_required
 from .models import Machine
 from .forms import MachineForm
 from django.views.generic import CreateView, DeleteView, UpdateView
@@ -7,6 +10,8 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 
+@login_required
+@admin_required
 def MachineDetails(request):
     machines = Machine.objects.all()
     return render(request, 'machines/machine_details.html', {'machines': machines})

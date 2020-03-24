@@ -314,3 +314,11 @@ ul.errorlist {
 .recommendations.cart img {
     width:120px;
 }
+
+.rightSideDiv {
+    float : right;
+    width:50%;
+    height:200px;
+    border: 4px solid green;
+
+}

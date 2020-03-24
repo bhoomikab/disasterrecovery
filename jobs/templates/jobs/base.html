@@ -2,18 +2,43 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <title>{% block title %}Disaster Recovery{% endblock %}</title>
     <link href= "{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
+
+<div align="right">
+        {% block header %}
+        {% if user.username %}
+            <p>User: {{ user.username }} | <a href="{% url 'logout' %}?next={{request.path}}">logout</a></p>
+        {% else %}
+            <p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>{% endif %}
+    {% endblock %}
+</div>
+
+
 <div id="sidebar">
+
+
     {% block sidebar %}
     <ul><li><a href="/">Home</a></li>
+
+     {% if user.is_authenticated and user.is_admin %}
     <ul><li><a href="{% url 'jobs:job_details' %}">Job code Management</a></li>
     <ul><li><a href="{% url 'machines:machine_details' %}">Machine Management</a></li>
     <ul><li><a href="/">Timecard Approval</a></li>
+    {% endif %}
+
+
+     {% if user.is_authenticated and user.is_contractor %}
+
+    <ul><li><a href="/">Timecard Approval</a></li>
+    {% endif %}
     {% endblock %}
+
 </div>
 <div id="content">
     {% block content %}

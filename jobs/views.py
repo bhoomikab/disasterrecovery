@@ -3,6 +3,9 @@ from django.urls import reverse_lazy
 from .models import Job
 from django.views.generic import CreateView, DeleteView, UpdateView
 from .forms import JobForm
+from user.decorators import admin_required
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -11,6 +14,8 @@ def home(request):
     return render(request, template_name='jobs/home.html')
 
 
+@login_required
+@admin_required
 def JobDetails(request):
     jobs = Job.objects.all()
     return render(request, 'jobs/job_details.html', {'jobs': jobs})

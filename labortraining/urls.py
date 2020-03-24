@@ -20,15 +20,24 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from user.views import AdminSignupView, ContractorSignupView, SignUpView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home),
+    url(r'^$', views.home, name='home'),
+    # url(r'user/', include(('user.urls', 'user'), namespace='user')),
     url(r'jobs/', include(('jobs.urls', 'jobs'), namespace='jobs')),
     url(r'machines/', include(('machines.urls', 'machines'), namespace='machines')),
+    url('accounts/$', include('django.contrib.auth.urls')),
+    url('accounts/signup/$', SignUpView.as_view(), name='signup'),
+    url('accounts/signup/administrator/$', AdminSignupView.as_view(), name='admin_signup'),
+    url('accounts/signup/contractor/$', ContractorSignupView.as_view(), name='contractor_signup'),
+    url(r'login/$', auth_views.LoginView.as_view(template_name='jobs/login.html'), name='login'),
+    url(r'logout/$', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

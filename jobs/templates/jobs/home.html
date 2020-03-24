@@ -1,6 +1,12 @@
 {% extends "jobs/base.html" %}
     {% block content %}
         <h1> Welcome to the Disaster Recovery Application  </h1>
+        <img src="media/jobs/pic.jpg" style="width:60%"/>
+    {% if user.is_authenticated %}
+        <h1> You can navigate the website through the sidebar  </h1>
+    {% else %}
+        <h1> Please <a href="{% url 'login' %}" class="btn btn-light" role="button">Log in</a>
+            to view this website or <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a></h1>
 
-
+    {% endif %}
     {% endblock %}
